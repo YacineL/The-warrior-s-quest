@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TWQ.Core
+namespace TWQ.Combat
 {
-    public class FollowCamera : MonoBehaviour
+    public class CombatTarget : MonoBehaviour
     {
-        [SerializeField] Transform target;
         // Start is called before the first frame update
         void Start()
         {
@@ -14,10 +13,11 @@ namespace TWQ.Core
         }
 
         // Update is called once per frame
-        void LateUpdate()
+        void Update()
         {
-            transform.position = target.position;
+
         }
     }
 }
+
 
