@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4458503742252162897}
   - component: {fileID: 7090331617991210138}
   - component: {fileID: 4560251800199837186}
-  - component: {fileID: 981291636055836055}
+  - component: {fileID: 1562206389}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d689861e278330408bfe1a5f43289e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &981291636055836055
+--- !u!136 &1562206389
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

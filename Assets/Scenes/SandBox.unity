@@ -1542,6 +1542,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d324ae8f50aa58046b3c65b2c77097cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponRange: 2
+--- !u!114 &1772689548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772689541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927f33b717dbc244f9852de55a43e5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1787646744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1976,7 +1989,7 @@ PrefabInstance:
     - target: {fileID: 1386933062857770200, guid: 41c31dc29e2e09d47a07629a92193c19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.71
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 1386933062857770200, guid: 41c31dc29e2e09d47a07629a92193c19,
         type: 3}
