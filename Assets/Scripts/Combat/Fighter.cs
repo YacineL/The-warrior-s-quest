@@ -36,35 +36,57 @@ namespace TWQ.Combat
 
         private void AttackBehaviour()
         {
+            transform.LookAt(target.transform);
+            target.transform.LookAt(transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
-                GetComponent<Animator>().SetTrigger("attack");
+                TriggerAttack();
                 timeSinceLastAttack = 0;
-                
+
             }
         }
+
+        private void TriggerAttack()
+        {
+            GetComponent<Animator>().SetTrigger("attack");
+            GetComponent<Animator>().ResetTrigger("stopAttack");
+        }
+
         //Called by the animator
         void Hit()
         {
+            if (target == null) { return; }
             target.TakeDamage(weaponDamage);
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
-            print("WAAAAAA3");
         }
 
         public void Cancel()
         {
-            GetComponent<Animator>().SetTrigger("stopAttack");
+            StopAttack();
             target = null;
+        }
+
+        private void StopAttack()
+        {
+            GetComponent<Animator>().SetTrigger("stopAttack");
+            GetComponent<Animator>().ResetTrigger("attack");
         }
 
         private bool GetIsInRange()
         {
             return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+        }
+
+        public bool CanAttack(GameObject combatTarget)
+        {
+            if (combatTarget == null) return false;
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return (targetToTest != null && !targetToTest.IsDead);
         }
     }
 }

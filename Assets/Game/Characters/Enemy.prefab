@@ -14,18 +14,6 @@ CapsuleCollider:
   m_Height: 1.8900981
   m_Direction: 1
   m_Center: {x: -0.024410997, y: 0.854918, z: -0.06710589}
---- !u!114 &2014720464669064736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052004034322177193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d689861e278330408bfe1a5f43289e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1244580581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,6 +26,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d689861e278330408bfe1a5f43289e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3603261427073130435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052004034322177193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3798c6f67848eb24db6773de819edaf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 5
 --- !u!1001 &4931011182925970586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -105,22 +106,22 @@ PrefabInstance:
     - target: {fileID: 5426865952800633619, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy (0)
       objectReference: {fileID: 0}
     - target: {fileID: 5426865952800633623, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.32
+      value: 6.2711143
       objectReference: {fileID: 0}
     - target: {fileID: 5426865952800633623, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04
+      value: -2.091173
       objectReference: {fileID: 0}
     - target: {fileID: 5426865952800633623, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.61
+      value: 5.463374
       objectReference: {fileID: 0}
     - target: {fileID: 5426865952800633623, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
@@ -166,6 +167,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772689542, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
+      propertyPath: weaponRange
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426865952800633626, guid: 892ce8f073881294e9e86b1aacb6548a,
+        type: 3}
+      propertyPath: m_Speed
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
