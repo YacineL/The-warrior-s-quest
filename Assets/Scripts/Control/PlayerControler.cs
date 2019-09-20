@@ -1,20 +1,23 @@
 ﻿using TWQ.Movement;
 using UnityEngine;
 using TWQ.Combat;
+using TWQ.Core;
 
 namespace TWQ.Control
 {
     public class PlayerControler : MonoBehaviour
     {
+        Health health;
         // Start is called before the first frame update
         void Start()
         {
-
+            health = GetComponent<Health>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (health.IsDead) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
             print("Toura ad ghligh !!");

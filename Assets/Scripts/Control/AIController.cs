@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TWQ.Combat;
+using TWQ.Core;
 using UnityEngine;
 
 namespace TWQ.Control
@@ -9,17 +10,25 @@ namespace TWQ.Control
     {
         [SerializeField] float chaseDistance = 5f;
         Fighter fighter;
+        Health health;
         GameObject player;
         private void Start()
         {
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
         }
         private void Update()
         {
+            if (health.IsDead) return;
+
             if ( InAttackRangeOfPlayer() && fighter.CanAttack(player))
             {
                 fighter.Attack(player);
+            }
+            else
+            {
+                fighter.Cancel();
             }
             
         }

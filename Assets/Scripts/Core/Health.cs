@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace TWQ.Combat
+namespace TWQ.Core
 {
     public class Health : MonoBehaviour
     {
@@ -13,11 +13,18 @@ namespace TWQ.Combat
         public void TakeDamage(float damage)
         {
             healthPoints = Mathf.Max(healthPoints - damage, 0);
-            if (healthPoints == 0 && !(isDead))
+            if (healthPoints == 0)
             {
-                GetComponent<Animator>().SetTrigger("death");
-                isDead = true;
+                Die();
             }
+        }
+
+        private void Die()
+        {
+            if (IsDead) return;
+            GetComponent<Animator>().SetTrigger("death");
+            isDead = true;
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TWQ.Combat
         [SerializeField] float weaponDamage = 10f;
 
         Health target;
-        float timeSinceLastAttack = 0;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         private void Update()
         {
