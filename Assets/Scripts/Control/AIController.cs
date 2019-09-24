@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TWQ.Combat;
 using TWQ.Core;
@@ -11,6 +12,9 @@ namespace TWQ.Control
     {
         [SerializeField] float chaseDistance = 5f;
         [SerializeField] float suspicionTime = 3f;
+        [SerializeField] PatrolPath patrolPath;
+        [SerializeField] float waypointTolerance = 1f;
+        [SerializeField] float waypointDwellTime = 3f;
 
         Fighter fighter;
         Health health;
@@ -19,6 +23,8 @@ namespace TWQ.Control
 
         Vector3 guardPosition;
         float timeSinceLastSaw = Mathf.Infinity;
+        float timeSinceArriveAtWaypoint = Mathf.Infinity;
+        int currentWapointIndex = 0;
         private void Start()
         {
             player = GameObject.FindWithTag("Player");
@@ -32,26 +38,64 @@ namespace TWQ.Control
         {
             if (health.IsDead) return;
 
-            if ( InAttackRangeOfPlayer() && fighter.CanAttack(player))
+            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
             {
-                timeSinceLastSaw = 0;
                 AttackBehaviour();
             }
-            else if(timeSinceLastSaw < suspicionTime)
+            else if (timeSinceLastSaw < suspicionTime)
             {
                 SuspicionBehaviour();
             }
             else
             {
-                GuardBehaviour();
+                PatrolBehaviour();
             }
-            timeSinceLastSaw += Time.deltaTime;
+            UpdateTimers();
         }
 
-        private void GuardBehaviour()
+        private void UpdateTimers()
         {
-            fighter.Cancel();
-            mover.StartMoveAction(guardPosition);
+            timeSinceLastSaw += Time.deltaTime;
+            timeSinceArriveAtWaypoint += Time.deltaTime;
+        }
+
+        private void PatrolBehaviour()
+        {
+            Vector3 nextPosition = guardPosition;
+            if (patrolPath != null)
+            {
+                if (AtWaypoint())
+                {
+                    CycleWaypoint();
+                }
+                nextPosition = GetCurrentWaypoint();
+            }
+            if (timeSinceArriveAtWaypoint > waypointDwellTime)
+            {
+                mover.StartMoveAction(nextPosition);
+            }
+
+        }
+
+        private Vector3 GetCurrentWaypoint()
+        {
+            return patrolPath.GetWaypoint(currentWapointIndex);
+        }
+
+        private void CycleWaypoint()
+        {
+            timeSinceArriveAtWaypoint = 0;
+            currentWapointIndex++;
+            if (currentWapointIndex == patrolPath.transform.childCount)
+            {
+                currentWapointIndex = currentWapointIndex % patrolPath.transform.childCount;
+            }
+        }
+
+        private bool AtWaypoint()
+        {
+            float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
+            return distanceToWaypoint < waypointTolerance;
         }
 
         private void SuspicionBehaviour()
@@ -61,6 +105,7 @@ namespace TWQ.Control
 
         private void AttackBehaviour()
         {
+            timeSinceLastSaw = 0;
             fighter.Attack(player);
         }
 
