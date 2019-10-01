@@ -205,7 +205,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 557046727957153049, guid: 193e93c8869153c4590af8925d5cb2d3, type: 3}
+    - {fileID: 0}
+    - {fileID: 4894620957912923311, guid: 193e93c8869153c4590af8925d5cb2d3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 193e93c8869153c4590af8925d5cb2d3, type: 3}
 --- !u!1 &18142109
 GameObject:
@@ -422,6 +423,11 @@ PrefabInstance:
       propertyPath: healthPoints
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8054782129569217846, guid: 193e93c8869153c4590af8925d5cb2d3,
+        type: 3}
+      propertyPath: m_Speed
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 193e93c8869153c4590af8925d5cb2d3, type: 3}
 --- !u!1001 &156961173
@@ -441,31 +447,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.6
+      value: 14.61
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.56
+      value: 4.9
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.63
+      value: 29.1
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.16480641
+      value: 0.21434511
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7726092
+      value: 0.79337436
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.26395366
+      value: -0.19275247
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.55339175
+      value: -0.5361527
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_RootOrder
@@ -473,15 +479,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 13.030001
+      value: 4.359
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 255.242
+      value: 249.40298
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 34.142002
+      value: 33.256
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalScale.x
@@ -598,7 +604,7 @@ TerrainCollider:
   m_Material: {fileID: 0}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: c1ad0229fd4af174f8fec5661962ea01, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!218 &273210509
 Terrain:
   m_ObjectHideFlags: 0
@@ -1015,20 +1021,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -1234,30 +1230,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: chaseDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 1678757382649233585}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -1585,20 +1566,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -1699,40 +1670,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177197, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177197, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: chaseDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 905859928347216163}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -1956,11 +1902,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.1
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.22
+      value: 35.42
       objectReference: {fileID: 0}
     - target: {fileID: 409538, guid: 5a346deceb21d0c4781e67a70fbcc1f6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2332,20 +2278,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -2652,40 +2588,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177197, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177197, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: chaseDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 1678757381351986665}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -2786,20 +2697,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -3152,20 +3053,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}
@@ -3487,20 +3378,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
+    - target: {fileID: 3603261427073130435, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
-      propertyPath: weaponRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052004034322177184, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721040237141645517, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: healthPoints
-      value: 40
+      propertyPath: patrolSpeedFraction
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404fb7575b7c95944b155706dcaf3fd0, type: 3}

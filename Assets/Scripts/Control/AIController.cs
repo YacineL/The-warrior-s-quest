@@ -5,16 +5,19 @@ using TWQ.Combat;
 using TWQ.Core;
 using TWQ.Movement;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace TWQ.Control
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField] float chaseDistance = 5f;
+        [SerializeField] float chaseDistance = 6.5f;
         [SerializeField] float suspicionTime = 3f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 1f;
         [SerializeField] float waypointDwellTime = 3f;
+        [Range(0, 1)]
+        [SerializeField] float patrolSpeedFraction = 0.2f;
 
         Fighter fighter;
         Health health;
@@ -72,7 +75,7 @@ namespace TWQ.Control
             }
             if (timeSinceArriveAtWaypoint > waypointDwellTime)
             {
-                mover.StartMoveAction(nextPosition);
+                mover.StartMoveAction(nextPosition, patrolSpeedFraction);
             }
 
         }
@@ -101,6 +104,7 @@ namespace TWQ.Control
         private void SuspicionBehaviour()
         {
             GetComponent<ActionScheduler>().CancelCurrentAction();
+            GetComponent<NavMeshAgent>().speed = 3f;
         }
 
         private void AttackBehaviour()

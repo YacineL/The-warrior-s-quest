@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using TWQ.Movement;
 using TWQ.Core;
@@ -25,7 +24,7 @@ namespace TWQ.Combat
 
             if (!GetIsInRange())
             {
-                GetComponent<Mover>().MoveTo(target.transform.position);  
+                GetComponent<Mover>().MoveTo(target.transform.position, 1f);  
             }
             else
             {
