@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TWQ.SceneManagement
@@ -7,9 +6,11 @@ namespace TWQ.SceneManagement
     public class Fader : MonoBehaviour
     {
         CanvasGroup canvasGroup;
-        public void Start()
+
+        private void Start()
         {
             canvasGroup = GetComponent<CanvasGroup>();
+
             StartCoroutine(FadeOutIn());
         }
 
@@ -21,16 +22,16 @@ namespace TWQ.SceneManagement
             print("Faded in");
         }
 
-        IEnumerator FadeOut(float time)
+        public IEnumerator FadeOut(float time)
         {
-            while(canvasGroup.alpha < 1)
+            while (canvasGroup.alpha < 1)
             {
                 canvasGroup.alpha += Time.deltaTime / time;
                 yield return null;
             }
         }
 
-        IEnumerator FadeIn(float time)
+        public IEnumerator FadeIn(float time)
         {
             while (canvasGroup.alpha > 0)
             {
