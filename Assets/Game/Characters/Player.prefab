@@ -1,5 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!136 &4501459308327236136
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14,6 +15,8 @@ CapsuleCollider:
   m_Height: 1.9518814
   m_Direction: 1
   m_Center: {x: 0, y: 0.88481617, z: 0}
+=======
+>>>>>>> parent of 9bc8311... [EVO] : adds a Transition scene
 --- !u!114 &4894620957912923311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,16 +101,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5426865952800633623, guid: 892ce8f073881294e9e86b1aacb6548a,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4668099636167030647, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: healthPoints
       value: 200
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 5426865952800633626, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: m_Speed
@@ -118,6 +117,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> parent of 9bc8311... [EVO] : adds a Transition scene
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
 --- !u!1 &8054782129569217855 stripped
