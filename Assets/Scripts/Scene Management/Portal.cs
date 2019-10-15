@@ -10,7 +10,7 @@ namespace TWQ.SceneManagement
     {
         enum DestinationIdentifier
         {
-            TransitionA,TransitionB,SandboxA,SandboxB
+            A,B,C,D
         }
         [SerializeField] int sceneToLoad = -1;
         [SerializeField] Transform spawnPoint;
@@ -32,8 +32,13 @@ namespace TWQ.SceneManagement
             }
             DontDestroyOnLoad(gameObject);
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+
             Portal otherPortal = GetOtherPortal();
-            UpdatePlayer(otherPortal);
+            if (otherPortal != null)
+            {
+                UpdatePlayer(otherPortal);
+            }
+
             Destroy(gameObject);
         }
 
