@@ -11,7 +11,10 @@ namespace TWQ.SceneManagement
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }
-
+        public void FadeOutImmediate()
+        {
+            canvasGroup.alpha = 1;
+        }
         public IEnumerator FadeOut(float time)
         {
             while (canvasGroup.alpha < 1)

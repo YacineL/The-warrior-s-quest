@@ -44,6 +44,7 @@ namespace TWQ.Core
             if (isDead && healthPoints!= 0)
             {
                 GetComponent<Animator>().SetTrigger("loadAfterDeath");
+                isDead = false;
             }
         }
     }

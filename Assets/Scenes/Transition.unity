@@ -313,11 +313,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -207.72499
       objectReference: {fileID: 0}
-    - target: {fileID: 9034670837185688790, guid: 6570357c25b31a541b23accbecac68e6,
-        type: 3}
-      propertyPath: uniqueIdentifier
-      value: 09403991-804a-453e-b101-91cfd9bbbff2
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7872112131845112489, guid: 6570357c25b31a541b23accbecac68e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6570357c25b31a541b23accbecac68e6, type: 3}
