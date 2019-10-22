@@ -10,6 +10,8 @@ namespace TWQ.Combat
         [SerializeField] float weaponRange = 1.5f;
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] float weaponDamage = 10f;
+        [SerializeField] GameObject weaponPrefab = null;
+        [SerializeField] Transform handTransform = null;
 
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
