@@ -2,6 +2,7 @@
 using UnityEngine;
 using TWQ.Movement;
 using TWQ.Core;
+using System;
 
 namespace TWQ.Combat
 {
@@ -15,6 +16,16 @@ namespace TWQ.Combat
 
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
+
+        private void Start()
+        {
+            SpawnWeapon();
+        }
+
+        private void SpawnWeapon()
+        {
+            Instantiate(weaponPrefab, handTransform);
+        }
 
         private void Update()
         {
