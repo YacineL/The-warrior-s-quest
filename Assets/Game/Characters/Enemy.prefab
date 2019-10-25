@@ -39,11 +39,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 6.5
-  chaseSpeed: 5
   suspicionTime: 3
   patrolPath: {fileID: 0}
   waypointTolerance: 1
   waypointDwellTime: 3
+  patrolSpeedFraction: 0.2
 --- !u!1001 &4931011182925970586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,6 +101,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+--- !u!4 &4931011182925509918 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 461188, guid: 679ff741e12a7e740819ede24a7000b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4931011182925970586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6280893209881538490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,7 +117,7 @@ PrefabInstance:
     - target: {fileID: 5426865952800633619, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (3)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5426865952800633623, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
@@ -187,6 +193,15 @@ PrefabInstance:
       propertyPath: weaponRange
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1772689542, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 4931011182925509918}
+    - target: {fileID: 1772689542, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 645f212698ec29047af4f432667d96e7,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
 --- !u!1 &2052004034322177193 stripped

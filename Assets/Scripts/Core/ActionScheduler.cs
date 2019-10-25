@@ -13,7 +13,6 @@ namespace TWQ.Core
             if (currentAction != null)
             {
                 currentAction.Cancel();
-                print("Ahl echaqour wel B14 !!");
             }           
             currentAction = action;
         }

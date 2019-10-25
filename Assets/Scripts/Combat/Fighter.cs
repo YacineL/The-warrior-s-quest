@@ -7,23 +7,23 @@ namespace TWQ.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] float weaponRange = 1.5f;
         [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] float weaponDamage = 10f;
         [SerializeField] Transform handTransform = null;
-        [SerializeField] Weapon weapon = null;
+        [SerializeField] Weapon defaultWeapon = null;
 
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
+        Weapon currentWeapon = null;
 
         private void Start()
         {
-            SpawnWeapon();
+            EquppingWeapon(defaultWeapon);
+            currentWeapon = defaultWeapon;
         }
 
-        private void SpawnWeapon()
+        public void EquppingWeapon(Weapon weapon)
         {
-            if (weapon == null) return;
+            currentWeapon = weapon;
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(handTransform, animator);
         }
@@ -50,7 +50,6 @@ namespace TWQ.Combat
         private void AttackBehaviour()
         {
             transform.LookAt(target.transform);
-            target.transform.LookAt(transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 TriggerAttack();
@@ -69,7 +68,7 @@ namespace TWQ.Combat
         void Hit()
         {
             if (target == null) { return; }
-            target.TakeDamage(weaponDamage);
+            target.TakeDamage(currentWeapon.WeaponDamage);
         }
 
         public void Attack(GameObject combatTarget)
@@ -94,7 +93,7 @@ namespace TWQ.Combat
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.WeaponRange;
         }
 
         public bool CanAttack(GameObject combatTarget)

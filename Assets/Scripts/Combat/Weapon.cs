@@ -2,15 +2,26 @@
 namespace TWQ.Combat
 {    
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make new weapon", order = 0)]
-    public class Weapon : ScriptableObject 
+    public class Weapon : ScriptableObject
     {
-        [SerializeField] AnimatorOverrideController weaponOverride = null;
-        [SerializeField] GameObject weaponPrefab = null;
+        [SerializeField] float weaponRange = 1.5f;
+        [SerializeField] AnimatorOverrideController animatorOverride = null;
+        [SerializeField] float weaponDamage = 10f;
+        [SerializeField] GameObject equippedPrefab = null;
+
+        public float WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
+        public float WeaponRange { get => weaponRange; set => weaponRange = value; }
 
         public void Spawn(Transform handTransform, Animator animator)
         {
-            Instantiate(weaponPrefab, handTransform);
-            animator.runtimeAnimatorController = weaponOverride;
+            if (equippedPrefab != null)
+            {
+                Instantiate(equippedPrefab, handTransform);
+            }
+            if (animatorOverride != null)
+            {
+                animator.runtimeAnimatorController = animatorOverride;
+            }
         }
     }
 }
