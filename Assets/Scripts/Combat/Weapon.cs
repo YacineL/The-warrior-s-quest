@@ -8,15 +8,25 @@ namespace TWQ.Combat
         [SerializeField] AnimatorOverrideController animatorOverride = null;
         [SerializeField] float weaponDamage = 10f;
         [SerializeField] GameObject equippedPrefab = null;
+        [SerializeField] bool isRightHanded = true;
 
         public float WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
         public float WeaponRange { get => weaponRange; set => weaponRange = value; }
 
-        public void Spawn(Transform handTransform, Animator animator)
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             if (equippedPrefab != null)
             {
-                Instantiate(equippedPrefab, handTransform);
+                Transform hand;
+                if (isRightHanded)
+                {
+                    hand = rightHand;
+                }
+                else
+                {
+                    hand = leftHand;
+                }
+                Instantiate(equippedPrefab, hand);
             }
             if (animatorOverride != null)
             {
