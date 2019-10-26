@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TWQ.Core;
+using UnityEngine;
 namespace TWQ.Combat
 {    
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make new weapon", order = 0)]
@@ -9,6 +10,7 @@ namespace TWQ.Combat
         [SerializeField] float weaponDamage = 10f;
         [SerializeField] GameObject equippedPrefab = null;
         [SerializeField] bool isRightHanded = true;
+        [SerializeField] Projectile projectile = null;
 
         public float WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
         public float WeaponRange { get => weaponRange; set => weaponRange = value; }
@@ -17,21 +19,39 @@ namespace TWQ.Combat
         {
             if (equippedPrefab != null)
             {
-                Transform hand;
-                if (isRightHanded)
-                {
-                    hand = rightHand;
-                }
-                else
-                {
-                    hand = leftHand;
-                }
+                Transform hand = GetHandTransform(rightHand, leftHand);
                 Instantiate(equippedPrefab, hand);
             }
             if (animatorOverride != null)
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
+        }
+
+        private Transform GetHandTransform(Transform rightHand, Transform leftHand)
+        {
+            Transform hand;
+            if (isRightHanded)
+            {
+                hand = rightHand;
+            }
+            else
+            {
+                hand = leftHand;
+            }
+
+            return hand;
+        }
+
+        public bool HasProjectile()
+        {
+            return projectile != null;
+        }
+
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        {
+            Projectile projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
+            projectileInstance.SetTarget(target);
         }
     }
 }

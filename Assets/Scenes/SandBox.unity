@@ -499,7 +499,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272498612}
-  m_LocalRotation: {x: -0.014320379, y: 0.9716943, z: -0.061097723, w: -0.2277548}
+  m_LocalRotation: {x: -0.014398367, y: 0.9715398, z: -0.061256398, w: -0.22836564}
   m_LocalPosition: {x: 57, y: 32.5, z: -24.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1226,7 +1226,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575390219}
-  m_LocalRotation: {x: 0.15898117, y: -0.17299458, z: 0.028306944, w: 0.97159487}
+  m_LocalRotation: {x: 0.15724756, y: -0.6973835, z: 0.16117103, w: 0.68040675}
   m_LocalPosition: {x: 25.8, y: 24.3, z: -28.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2871,7 +2871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1104412559}
-  m_PathPosition: 0
+  m_PathPosition: 5
   m_PositionUnits: 0
   m_PathOffset: {x: -4.732078, y: -0.165884, z: -9.857379}
   m_XDamping: 0
@@ -5089,7 +5089,7 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 645f212698ec29047af4f432667d96e7,
+      objectReference: {fileID: 11400000, guid: d91e704f36c5f3042af04814a8284ada,
         type: 2}
     - target: {fileID: 2502012984462936372, guid: 6570357c25b31a541b23accbecac68e6,
         type: 3}
@@ -5135,6 +5135,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.000000039115562
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872112132516124418, guid: 6570357c25b31a541b23accbecac68e6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.086999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872112132516124418, guid: 6570357c25b31a541b23accbecac68e6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -66.48286
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6570357c25b31a541b23accbecac68e6, type: 3}

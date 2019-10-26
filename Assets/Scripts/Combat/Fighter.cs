@@ -64,20 +64,6 @@ namespace TWQ.Combat
             GetComponent<Animator>().SetTrigger("attack");
             GetComponent<Animator>().ResetTrigger("stopAttack");
         }
-
-        //Called by the animator
-        void Hit()
-        {
-            if (target == null) { return; }
-            target.TakeDamage(currentWeapon.WeaponDamage);
-        }
-
-        void Shoot()
-        {
-            if (target == null) { return; }
-            target.TakeDamage(currentWeapon.WeaponDamage);
-        }
-
         public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
@@ -108,6 +94,26 @@ namespace TWQ.Combat
             if (combatTarget == null) return false;
             Health targetToTest = combatTarget.GetComponent<Health>();
             return (targetToTest != null && !targetToTest.IsDead);
+        }
+
+        //Called by the animator
+        void Hit()
+        {
+            if (target == null) { return; }
+            
+            if(currentWeapon.HasProjectile())
+            {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            }
+            else
+            { 
+                target.TakeDamage(currentWeapon.WeaponDamage);
+            }
+        }
+
+        void Shoot()
+        {
+            Hit();
         }
     }
 }
