@@ -45,7 +45,17 @@ namespace TWQ.Control
 
         private bool InteractWithMovement()
         {
-            RaycastHit hit;
+            if (Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f)
+            {
+                float yAxis = Input.GetAxis("Vertical");
+                float xAxis = Input.GetAxis("Horizontal");
+                GetComponent<Mover>().StartMoveAction((transform.position + Vector3.forward * yAxis + Vector3.right * xAxis), 1f);
+                return true;
+            }
+            /* I'm disabling this part because i prefer moving with keys i'm also willing to make the combat system
+            work with keys (letting only ranged weapons for clicking) */
+            
+            /*RaycastHit hit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if (hasHit)
             {
@@ -54,8 +64,10 @@ namespace TWQ.Control
                     GetComponent<Mover>().StartMoveAction(hit.point, 1f);
                 }
                 return true;
-            }
+            }*/
+           
             return false;
+            
         }
 
         private static Ray GetMouseRay()
