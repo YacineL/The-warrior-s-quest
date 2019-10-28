@@ -36,7 +36,7 @@ namespace TWQ.Combat
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Enemy")
+            if (other.tag == "Enemy"  || other.tag == "Player")
             {
                 other.transform.GetComponent<Health>().TakeDamage(damage);
                 Destroy(gameObject);
