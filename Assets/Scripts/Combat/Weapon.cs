@@ -12,15 +12,19 @@ namespace TWQ.Combat
         [SerializeField] bool isRightHanded = true;
         [SerializeField] Projectile projectile = null;
 
+        const string weaponName = "Weapon";
         public float WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
         public float WeaponRange { get => weaponRange; set => weaponRange = value; }
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
+            DestroyOldWeapon(rightHand, leftHand);
+
             if (equippedPrefab != null)
             {
                 Transform hand = GetHandTransform(rightHand, leftHand);
-                Instantiate(equippedPrefab, hand);
+                GameObject weapon = Instantiate(equippedPrefab, hand);
+                weapon.name = weaponName;
             }
             if (animatorOverride != null)
             {
@@ -28,6 +32,18 @@ namespace TWQ.Combat
             }
         }
 
+        private static void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+        {
+            Transform oldWeapon = rightHand.Find(weaponName);
+            if (oldWeapon == null)
+            {
+                oldWeapon = leftHand.Find(weaponName);
+            }
+            if (oldWeapon == null) return;
+
+            oldWeapon.name = "DESTROYING";
+            Destroy(oldWeapon.gameObject);
+        }
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)
         {
             Transform hand;
