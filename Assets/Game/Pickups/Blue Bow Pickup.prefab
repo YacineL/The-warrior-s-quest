@@ -56,16 +56,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7541755
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7541755
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7541755
+      value: 4.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
@@ -79,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 309687137529273389, guid: 49c38400a989a924e884aac0f826a070,
         type: 3}
       propertyPath: m_Name
-      value: Bow Pickup
+      value: Blue Bow Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 309687137529273388, guid: 49c38400a989a924e884aac0f826a070,
         type: 3}

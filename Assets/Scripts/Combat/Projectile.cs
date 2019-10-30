@@ -10,6 +10,7 @@ namespace TWQ.Combat
     {
         [SerializeField] float speed = 1f;
         [SerializeField] bool isHoming = true;
+        [SerializeField] GameObject hitEffect = null;
         Health target = null;
         float damage = 0f;
 
@@ -21,7 +22,7 @@ namespace TWQ.Combat
         {
             if (target == null) return;
 
-            if (isHoming)
+            if (isHoming && !target.IsDead)
             {
                 transform.LookAt(GetAimLocation());
             }
@@ -44,15 +45,15 @@ namespace TWQ.Combat
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Enemy"  || other.tag == "Player")
+            if (target.IsDead) return; 
+            if (other.GetComponent<Health>() != null)
             {
                 other.transform.GetComponent<Health>().TakeDamage(damage);
+                if (hitEffect != null)
+                {
+                    Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+                }
                 Destroy(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-                return;
             }
         }
     }
