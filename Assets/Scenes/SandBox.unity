@@ -4615,7 +4615,7 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 1c4df7830c1ab0b419c14d3eec99d0f1,
+      objectReference: {fileID: 11400000, guid: d91e704f36c5f3042af04814a8284ada,
         type: 2}
     - target: {fileID: 2502012984462936372, guid: 6570357c25b31a541b23accbecac68e6,
         type: 3}
