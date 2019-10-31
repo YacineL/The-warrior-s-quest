@@ -11,6 +11,9 @@ namespace TWQ.Combat
         [SerializeField] float speed = 1f;
         [SerializeField] bool isHoming = true;
         [SerializeField] GameObject hitEffect = null;
+        [SerializeField] float maxLifeTime = 10f;
+        [SerializeField] GameObject[] destroyOnHit = null;
+        [SerializeField] float lifeAfterImpact = 2f;
         Health target = null;
         float damage = 0f;
 
@@ -33,6 +36,8 @@ namespace TWQ.Combat
         {
             this.target = target;
             this.damage = damage;
+
+            Destroy(gameObject, maxLifeTime);
         }
         private Vector3 GetAimLocation()
         {
@@ -49,11 +54,19 @@ namespace TWQ.Combat
             if (other.GetComponent<Health>() != null)
             {
                 other.transform.GetComponent<Health>().TakeDamage(damage);
+                transform.GetComponent<Collider>().enabled = false;
+                speed = 0f;
                 if (hitEffect != null)
                 {
                     Instantiate(hitEffect, GetAimLocation(), transform.rotation);
                 }
-                Destroy(gameObject);
+
+                foreach (GameObject toDestroy in destroyOnHit)
+                {
+                    Destroy(toDestroy);
+                }
+
+                Destroy(gameObject, lifeAfterImpact);
             }
         }
     }

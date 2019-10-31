@@ -179,7 +179,7 @@ PrefabInstance:
     - target: {fileID: 4668099636167030647, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: healthPoints
-      value: 200
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 5426865952800633626, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
@@ -218,6 +218,11 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 47926815105415268}
+    - target: {fileID: 1772689542, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: 034dcd609d176284ba7cc9495a9be750,
+        type: 2}
     - target: {fileID: 3802878099803298258, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: uniqueIdentifier

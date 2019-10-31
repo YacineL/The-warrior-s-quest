@@ -30,6 +30,16 @@ namespace TWQ.Combat
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
+
+            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+            if(animatorOverride != null)
+            {
+                animator.runtimeAnimatorController = animatorOverride;  
+            }
+            else if (overrideController != null)
+            {
+                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
+            }
         }
 
         private static void DestroyOldWeapon(Transform rightHand, Transform leftHand)

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 930038276638234473}
   - component: {fileID: 930038276656583209}
   - component: {fileID: 930038276656491401}
+  - component: {fileID: 2200431042940755249}
   m_Layer: 0
-  m_Name: Shower
+  m_Name: Fireball Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -894,7 +895,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 80
+        scalar: 200
         minScalar: 80
         maxCurve:
           serializedVersion: 2
@@ -4784,3 +4785,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &2200431042940755249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930038276638526281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a13c89b57b7634d8c43833f4446721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

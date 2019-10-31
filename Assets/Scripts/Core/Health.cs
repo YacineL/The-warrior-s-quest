@@ -24,6 +24,7 @@ namespace TWQ.Core
             if (IsDead) return;
             GetComponent<Animator>().SetTrigger("death");
             isDead = true;
+            GetComponent<Collider>().enabled = false;
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
