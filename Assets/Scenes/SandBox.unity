@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.61
     agentHeight: 2.18
     agentSlope: 38.5
     agentClimb: 0.9
@@ -381,7 +381,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272498612}
-  m_LocalRotation: {x: -0.03062329, y: 0.9362772, z: -0.08443214, w: -0.33958575}
+  m_LocalRotation: {x: -0.030616645, y: 0.9363016, z: -0.08443434, w: -0.33951858}
   m_LocalPosition: {x: 58.64, y: 32.96, z: -28.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3867,7 +3867,7 @@ PrefabInstance:
     - target: {fileID: 1704227973644289379, guid: 3d47b091ff3307e41954b6c8ef7a1178,
         type: 3}
       propertyPath: m_Size.z
-      value: 0.07985774
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 1704227973644289379, guid: 3d47b091ff3307e41954b6c8ef7a1178,
         type: 3}
@@ -3883,6 +3883,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.z
       value: 0.042428833
+      objectReference: {fileID: 0}
+    - target: {fileID: 1704227973644289379, guid: 3d47b091ff3307e41954b6c8ef7a1178,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d47b091ff3307e41954b6c8ef7a1178, type: 3}
