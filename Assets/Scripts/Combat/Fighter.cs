@@ -17,21 +17,44 @@ namespace TWQ.Combat
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
         Weapon currentWeapon = null;
-        [SerializeField] List<Weapon> weaponInventory = null;
         string weaponInventoryNames = null;
+        WeaponInventory weaponInventory = null;
+        int currentIndex;
 
         private void Start()
         {
-            defaultWeapon.WeaponRange = 15;
+            GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
+            weaponInventory = gameObject.GetComponent<WeaponInventory>();
             if (currentWeapon == null)
             {
                 EquppingWeapon(defaultWeapon);
             }
         }
 
+        private void Update()
+        {
+            timeSinceLastAttack += Time.deltaTime;
+
+            if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
+
+            if (target == null) return;
+
+            if (target.IsDead) return;
+
+            if (!GetIsInRange())
+            {
+                GetComponent<Mover>().MoveTo(target.transform.position, 1f);
+            }
+            else
+            {
+                GetComponent<Mover>().Cancel();
+                AttackBehaviour();
+            }
+        }
+
         public bool IsAlreadyInInventory(Weapon pickedWeapon)
         {
-            foreach(Weapon weapon in weaponInventory)
+            foreach(Weapon weapon in weaponInventory.StoredWeapons)
             {
                 if (weapon.Equals(pickedWeapon)) return true;
             }
@@ -42,9 +65,10 @@ namespace TWQ.Combat
             currentWeapon = weapon;
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
+            currentIndex = GetCurrentWeaponIndex();
             if(!IsAlreadyInInventory(weapon))
             {
-                weaponInventory.Add(weapon);
+                weaponInventory.StoredWeapons.Add(weapon);
                 weaponInventoryNames += (weapon.name + "/");
             }
         }
@@ -52,13 +76,13 @@ namespace TWQ.Combat
         public int GetCurrentWeaponIndex()
         {
             int iterator = 0;
-            foreach (Weapon weapon in weaponInventory)
+            foreach (Weapon weapon in weaponInventory.StoredWeapons)
             {
                 if (weapon.Equals(currentWeapon))
                 {
-                    print(iterator);
                     return iterator;
                 }
+                iterator++;
             }
             return 0;
         }
@@ -74,36 +98,18 @@ namespace TWQ.Combat
                 if (c.Equals("|"))
                 {
                     currentWeaponIndex = int.Parse(weaponInventoryString.Substring(iterator));
-                    EquppingWeapon(weaponInventory[currentWeaponIndex]);
+                    EquppingWeapon(weaponInventory.StoredWeapons[currentWeaponIndex]);
                     return;
                 }
                 else if (c.Equals("/"))
                 {
-                    weaponInventory.Add(Resources.Load<Weapon>(weaponName));
+                    weaponInventory.StoredWeapons.Add(Resources.Load<Weapon>(weaponName));
                     weaponName = null;
                 }
                 else 
                 {
                     weaponName += c;
                 }
-            }
-        }
-        private void Update()
-        {
-            timeSinceLastAttack += Time.deltaTime;
-
-            if (target == null) return;
-
-            if (target.IsDead) return;
-
-            if (!GetIsInRange())
-            {
-                GetComponent<Mover>().MoveTo(target.transform.position, 1f);  
-            }
-            else
-            {
-                GetComponent<Mover>().Cancel();
-                AttackBehaviour();
             }
         }
 
@@ -175,6 +181,12 @@ namespace TWQ.Combat
             Hit();
         }
 
+        public void SwitchWeapons()
+        {
+            int switchIndex = (GetCurrentWeaponIndex() + 1) % weaponInventory.StoredWeapons.Count;
+            EquppingWeapon(weaponInventory.StoredWeapons[switchIndex]);
+        }/**/
+
         public object CaptureState()
         {
             return currentWeapon.name;
@@ -182,7 +194,8 @@ namespace TWQ.Combat
 
         public void RestoreState(object state)
         {
-            LoadWeaponInventory((string)state);
+            GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
+            weaponInventory = gameObject.GetComponent<WeaponInventory>();
             string weaponName = (string)state;
             Weapon weapon = Resources.Load<Weapon>(weaponName);
             EquppingWeapon(weapon);

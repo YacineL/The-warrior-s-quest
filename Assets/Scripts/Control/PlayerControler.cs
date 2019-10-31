@@ -8,10 +8,13 @@ namespace TWQ.Control
     public class PlayerControler : MonoBehaviour
     {
         Health health;
+        Fighter fighter;
         // Start is called before the first frame update
         void Start()
         {
             health = GetComponent<Health>();
+            fighter = GetComponent<Fighter>();
+
         }
 
         // Update is called once per frame
@@ -19,7 +22,8 @@ namespace TWQ.Control
         {
             if (health.IsDead) return;
             if (InteractWithCombat()) return;
-            if (InteractWithMovement()) return;        }
+            if (InteractWithMovement()) return;
+        }
 
         private bool InteractWithCombat()
         {

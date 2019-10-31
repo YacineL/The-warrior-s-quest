@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Collide
   - Enemy
+  - Fire
+  - Inventory
   layers:
   - Default
   - TransparentFX

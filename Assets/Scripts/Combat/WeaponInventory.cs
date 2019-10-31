@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace TWQ.Combat
 {
-    [CreateAssetMenu(fileName = "Weapon Inventory", menuName = "Weapon Inventories/Make new weapon inventory", order = 0)]
-    public class WeaponInventory : ScriptableObject
+    public class WeaponInventory : MonoBehaviour
     {
-        List<Weapon> weapons = null;
-        int lastUsedWeaponIndex;
+        [SerializeField] string weaponInventoryString = null;
+        [SerializeField] List<Weapon> storedWeapons = null;
 
-        public List<Weapon> Weapons { get => weapons; set => weapons = value; }
-        public int LastUsedWeaponIndex { get => lastUsedWeaponIndex; set => lastUsedWeaponIndex = value; }
+        public string WeaponInventoryString { get => weaponInventoryString; set => weaponInventoryString = value; }
+        public List<Weapon> StoredWeapons { get => storedWeapons; set => storedWeapons = value; }
     }
 }
