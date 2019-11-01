@@ -221,12 +221,16 @@ PrefabInstance:
     - target: {fileID: 1772689542, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}
       propertyPath: inventory
       value: 
-      objectReference: {fileID: 11400000, guid: 034dcd609d176284ba7cc9495a9be750,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3802878099803298258, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}
       propertyPath: uniqueIdentifier
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6368292143877116746, guid: 892ce8f073881294e9e86b1aacb6548a,
+        type: 3}
+      propertyPath: characterClass
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892ce8f073881294e9e86b1aacb6548a, type: 3}

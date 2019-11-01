@@ -16,26 +16,27 @@ namespace TWQ.Combat
 
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
-        Weapon currentWeapon = null;
-        string weaponInventoryNames = null;
-        WeaponInventory weaponInventory = null;
-        int currentIndex;
+        public Weapon currentWeapon = null;
+
 
         private void Start()
         {
-            GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
-            weaponInventory = gameObject.GetComponent<WeaponInventory>();
             if (currentWeapon == null)
             {
                 EquppingWeapon(defaultWeapon);
+                WeaponInventory weaponInventory;
+                GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
+                weaponInventory =gameObject.GetComponent<WeaponInventory>();
+                if (!weaponInventory.IsAlreadyInInventory(defaultWeapon) && transform.tag =="Player")
+                {
+                    weaponInventory.StoredWeapons.Add(defaultWeapon);
+                }
             }
         }
 
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-
-            if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
 
             if (target == null) return;
 
@@ -52,65 +53,11 @@ namespace TWQ.Combat
             }
         }
 
-        public bool IsAlreadyInInventory(Weapon pickedWeapon)
-        {
-            foreach(Weapon weapon in weaponInventory.StoredWeapons)
-            {
-                if (weapon.Equals(pickedWeapon)) return true;
-            }
-            return false;
-        }
         public void EquppingWeapon(Weapon weapon)
         {
             currentWeapon = weapon;
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
-            currentIndex = GetCurrentWeaponIndex();
-            if(!IsAlreadyInInventory(weapon))
-            {
-                weaponInventory.StoredWeapons.Add(weapon);
-                weaponInventoryNames += (weapon.name + "/");
-            }
-        }
-
-        public int GetCurrentWeaponIndex()
-        {
-            int iterator = 0;
-            foreach (Weapon weapon in weaponInventory.StoredWeapons)
-            {
-                if (weapon.Equals(currentWeapon))
-                {
-                    return iterator;
-                }
-                iterator++;
-            }
-            return 0;
-        }
-
-        public void LoadWeaponInventory(string weaponInventoryString)
-        {
-            int iterator = 0;
-            string weaponName = null;
-            int currentWeaponIndex;
-            foreach (char c in  (weaponInventoryString))
-            {
-                iterator++;
-                if (c.Equals("|"))
-                {
-                    currentWeaponIndex = int.Parse(weaponInventoryString.Substring(iterator));
-                    EquppingWeapon(weaponInventory.StoredWeapons[currentWeaponIndex]);
-                    return;
-                }
-                else if (c.Equals("/"))
-                {
-                    weaponInventory.StoredWeapons.Add(Resources.Load<Weapon>(weaponName));
-                    weaponName = null;
-                }
-                else 
-                {
-                    weaponName += c;
-                }
-            }
         }
 
         private void AttackBehaviour()
@@ -181,11 +128,7 @@ namespace TWQ.Combat
             Hit();
         }
 
-        public void SwitchWeapons()
-        {
-            int switchIndex = (GetCurrentWeaponIndex() + 1) % weaponInventory.StoredWeapons.Count;
-            EquppingWeapon(weaponInventory.StoredWeapons[switchIndex]);
-        }/**/
+        
 
         public object CaptureState()
         {
@@ -194,8 +137,7 @@ namespace TWQ.Combat
 
         public void RestoreState(object state)
         {
-            GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
-            weaponInventory = gameObject.GetComponent<WeaponInventory>();
+
             string weaponName = (string)state;
             Weapon weapon = Resources.Load<Weapon>(weaponName);
             EquppingWeapon(weapon);
