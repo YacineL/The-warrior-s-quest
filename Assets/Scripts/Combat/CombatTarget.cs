@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TWQ.Core;
+﻿using UnityEngine;
+using TWQ.Resources;
 
 namespace TWQ.Combat
 {

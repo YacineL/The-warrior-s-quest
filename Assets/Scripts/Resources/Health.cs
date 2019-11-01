@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using TWQ.Saving;
+using TWQ.Stats;
+using TWQ.Core;
 
-namespace TWQ.Core
+namespace TWQ.Resources
 {
     public class Health : MonoBehaviour, ISaveable
     {
@@ -10,6 +12,10 @@ namespace TWQ.Core
 
         public bool IsDead { get => isDead; set => isDead = value; }
 
+        private void Start()
+        {
+            healthPoints = GetComponent<BaseStats>().GetHealth();
+        }
         public void TakeDamage(float damage)
         {
             healthPoints = Mathf.Max(healthPoints - damage, 0);

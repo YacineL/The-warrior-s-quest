@@ -1,7 +1,8 @@
 ﻿using TWQ.Movement;
 using UnityEngine;
 using TWQ.Combat;
-using TWQ.Core;
+using TWQ.Inventory;
+using TWQ.Resources;
 
 namespace TWQ.Control
 {

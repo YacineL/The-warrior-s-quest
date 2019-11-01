@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using TWQ.Movement;
 using TWQ.Core;
-using System;
 using TWQ.Saving;
-using System.Collections.Generic;
+using TWQ.Inventory;
+using TWQ.Resources;
 
 namespace TWQ.Combat
 {
@@ -139,7 +139,7 @@ namespace TWQ.Combat
         {
 
             string weaponName = (string)state;
-            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquppingWeapon(weapon);
         }
     }

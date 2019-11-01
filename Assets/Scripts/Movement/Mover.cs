@@ -1,4 +1,5 @@
 ﻿using TWQ.Core;
+using TWQ.Resources;
 using TWQ.Saving;
 using UnityEngine;
 using UnityEngine.AI;

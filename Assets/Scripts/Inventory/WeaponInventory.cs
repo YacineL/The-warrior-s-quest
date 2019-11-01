@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TWQ.Combat;
 using UnityEngine;
 
-namespace TWQ.Combat
+namespace TWQ.Inventory
 {
     public class WeaponInventory : MonoBehaviour
     {

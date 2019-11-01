@@ -1,7 +1,7 @@
-﻿using TWQ.Core;
+﻿using TWQ.Resources;
 using UnityEngine;
 namespace TWQ.Combat
-{    
+{
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make new weapon", order = 0)]
     public class Weapon : ScriptableObject
     {

@@ -243,7 +243,7 @@ PrefabInstance:
     - target: {fileID: 2068229509458551858, guid: d1854b4d4c8e2044c9f3cfea36b7c78b,
         type: 3}
       propertyPath: m_Name
-      value: Weapon Inventory
+      value: Inventory
       objectReference: {fileID: 0}
     - target: {fileID: 4926184349709881200, guid: d1854b4d4c8e2044c9f3cfea36b7c78b,
         type: 3}

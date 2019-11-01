@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TWQ.Combat;
+﻿using TWQ.Combat;
 using TWQ.Core;
 using TWQ.Movement;
+using TWQ.Resources;
 using UnityEngine;
 using UnityEngine.AI;
 

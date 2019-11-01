@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TWQ.Stats
 {
@@ -12,5 +9,10 @@ namespace TWQ.Stats
         [SerializeField] int startingLevel = 1;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
+
+        public float GetHealth()
+        {
+            return 0;
+        }
     }
 }
