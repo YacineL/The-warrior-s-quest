@@ -4,7 +4,7 @@ namespace TWQ.Stats
 {
     public class BaseStats : MonoBehaviour
     {
-        public const int maxLevel = 99;
+        public const int maxLevel = 5;
         [Range(1,maxLevel)]
         [SerializeField] int startingLevel = 1;
         [SerializeField] CharacterClass characterClass;
@@ -12,7 +12,7 @@ namespace TWQ.Stats
 
         public float GetHealth()
         {
-            return 0;
+            return progression.GetHealth(characterClass,startingLevel);
         }
     }
 }
