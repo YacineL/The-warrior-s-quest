@@ -12,6 +12,7 @@ namespace TWQ.Combat
         [SerializeField] GameObject[] destroyOnHit = null;
         [SerializeField] float lifeAfterImpact = 2f;
         Health target = null;
+        GameObject instigator = null;
         float damage = 0f;
 
         void Start()
@@ -29,10 +30,11 @@ namespace TWQ.Combat
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget(GameObject instigator,Health target, float damage)
         {
             this.target = target;
             this.damage = damage;
+            this.instigator = instigator;
 
             Destroy(gameObject, maxLifeTime);
         }
@@ -50,7 +52,7 @@ namespace TWQ.Combat
             if (target.IsDead) return; 
             if (other.GetComponent<Health>() != null)
             {
-                other.transform.GetComponent<Health>().TakeDamage(damage);
+                other.transform.GetComponent<Health>().TakeDamage(instigator,damage);
                 transform.GetComponent<Collider>().enabled = false;
                 speed = 0f;
                 if (hitEffect != null)

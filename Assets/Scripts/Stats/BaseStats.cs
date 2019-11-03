@@ -14,5 +14,10 @@ namespace TWQ.Stats
         {
             return progression.GetHealth(characterClass,startingLevel);
         }
+
+        public float GetXPReward()
+        {
+            return 10;
+        }
     }
 }

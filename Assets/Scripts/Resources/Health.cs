@@ -2,6 +2,7 @@
 using TWQ.Saving;
 using TWQ.Stats;
 using TWQ.Core;
+using System;
 
 namespace TWQ.Resources
 {
@@ -16,14 +17,16 @@ namespace TWQ.Resources
         {
             healthPoints = GetComponent<BaseStats>().GetHealth();
         }
-        public void TakeDamage(float damage)
+        public void TakeDamage(GameObject instigator,float damage)
         {
             healthPoints = Mathf.Max(healthPoints - damage, 0);
             if (healthPoints == 0)
             {
                 Die();
+                AwardXP(instigator);
             }
         }
+
         public float GetPercentage()
         {
             return (healthPoints / GetComponent<BaseStats>().GetHealth()) * 100;
@@ -40,6 +43,15 @@ namespace TWQ.Resources
             isDead = true;
             GetComponent<Collider>().enabled = false;
             GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        private void AwardXP(GameObject instigator)
+        {
+            Experience xp = instigator.GetComponent<Experience>();
+            if (xp != null)
+            { 
+                xp.GainXP(GetComponent<BaseStats>().GetXPReward());
+            }
         }
 
         public object CaptureState()
