@@ -24,7 +24,15 @@ namespace TWQ.Resources
                 Die();
             }
         }
+        public float GetPercentage()
+        {
+            return (healthPoints / GetComponent<BaseStats>().GetHealth()) * 100;
+        }
 
+        public float GetHealthPoints()
+        {
+            return healthPoints;
+        }
         private void Die()
         {
             if (IsDead) return;
