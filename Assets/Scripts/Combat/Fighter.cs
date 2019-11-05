@@ -21,16 +21,20 @@ namespace TWQ.Combat
 
         private void Start()
         {
+            WeaponInventory weaponInventory;
+            GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
+            weaponInventory = gameObject.GetComponent<WeaponInventory>();
             if (currentWeapon == null)
             {
                 EquppingWeapon(defaultWeapon);
-                WeaponInventory weaponInventory;
-                GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
-                weaponInventory =gameObject.GetComponent<WeaponInventory>();
-                if (!weaponInventory.IsAlreadyInInventory(defaultWeapon) && transform.tag =="Player")
+                if (!weaponInventory.IsAlreadyInInventory(defaultWeapon)  && transform.tag =="Player")
                 {
                     weaponInventory.StoredWeapons.Add(defaultWeapon);
                 }
+            }
+            else if (!weaponInventory.IsAlreadyInInventory(currentWeapon) && transform.tag == "Player")
+            {
+                weaponInventory.StoredWeapons.Add(currentWeapon);
             }
         }
 

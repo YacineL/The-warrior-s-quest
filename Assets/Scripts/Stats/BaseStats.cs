@@ -9,15 +9,33 @@ namespace TWQ.Stats
         [SerializeField] int startingLevel = 1;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
-
+        private void Update()
+        {
+            if(gameObject.tag == "Player")
+            {
+                print(GetLevel());
+            }
+        }
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(stat,characterClass,startingLevel);
+            return progression.GetStat(stat,characterClass,GetLevel());
         }
 
-        public float GetXPReward()
+        public int GetLevel()
         {
-            return 10;
+            Experience experience = GetComponent<Experience>();
+            if (experience == null) return startingLevel;
+            float currentXP = GetComponent<Experience>().ExperiencePoints;
+            int penultimateLevel = progression.GetLevels(Stat.XPToLevelUp, characterClass);
+            for (int level =1 ; level < penultimateLevel; level++)
+            {
+                float XPToLevelUp = progression.GetStat(Stat.XPToLevelUp, characterClass, level);
+                if (XPToLevelUp > currentXP)
+                {
+                    return level;
+                }
+            }
+            return penultimateLevel + 1;
         }
     }
 }

@@ -4,5 +4,6 @@
     {
         Health,
         XPReward,
+        XPToLevelUp
     }
 }

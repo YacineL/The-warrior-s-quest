@@ -8,14 +8,17 @@ namespace TWQ.Resources
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float healthPoints = 100f;
+        [SerializeField] float healthPoints = -1f;
         bool isDead = false;
 
         public bool IsDead { get => isDead; set => isDead = value; }
 
         private void Start()
         {
-            healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+            if(healthPoints<0)
+            {
+                healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+            }
         }
         public void TakeDamage(GameObject instigator,float damage)
         {
@@ -68,10 +71,11 @@ namespace TWQ.Resources
                 Die();
             }
 
-            if (isDead && healthPoints!= 0)
+            if (isDead && healthPoints > 0)
             {
                 GetComponent<Animator>().SetTrigger("loadAfterDeath");
                 isDead = false;
+                transform.GetComponent<Collider>().enabled = true;
             }
         }
     }

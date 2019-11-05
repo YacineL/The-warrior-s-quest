@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TWQ.Saving;
 using UnityEngine;
 
@@ -26,6 +27,16 @@ namespace TWQ.SceneManagement
             {
                 Save();
             }
+
+            if (Input.GetKeyDown(KeyCode.Delete))
+            {
+                Delete();
+            }
+        }
+
+        private void Delete()
+        {
+            GetComponent<SavingSystem>().Delete(defaultSaveFile);
         }
 
         public void Save()
@@ -37,5 +48,7 @@ namespace TWQ.SceneManagement
         {
             GetComponent<SavingSystem>().Load(defaultSaveFile);
         }
+
+
     }
 }
