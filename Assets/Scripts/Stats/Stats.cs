@@ -1,6 +1,6 @@
 ﻿namespace TWQ.Stats
 {
-    enum Stats
+    public enum Stat
     {
         Health,
         XPReward,

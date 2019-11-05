@@ -15,7 +15,7 @@ namespace TWQ.Resources
 
         private void Start()
         {
-            healthPoints = GetComponent<BaseStats>().GetHealth();
+            healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
         public void TakeDamage(GameObject instigator,float damage)
         {
@@ -29,7 +29,7 @@ namespace TWQ.Resources
 
         public float GetPercentage()
         {
-            return (healthPoints / GetComponent<BaseStats>().GetHealth()) * 100;
+            return (healthPoints / GetComponent<BaseStats>().GetStat(Stat.Health)) * 100;
         }
 
         public float GetHealthPoints()
@@ -50,7 +50,7 @@ namespace TWQ.Resources
             Experience xp = instigator.GetComponent<Experience>();
             if (xp != null)
             { 
-                xp.GainXP(GetComponent<BaseStats>().GetXPReward());
+                xp.GainXP(GetComponent<BaseStats>().GetStat(Stat.XPReward));
             }
         }
 
