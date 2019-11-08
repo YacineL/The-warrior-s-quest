@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TWQ.Saving;
+using System;
 
 namespace TWQ.Stats
 {
@@ -11,9 +12,12 @@ namespace TWQ.Stats
 
         public float ExperiencePoints { get => experiencePoints; set => experiencePoints = value; }
 
+        public event Action onXPGained;
+
         public void GainXP(float experience)
         {
-            ExperiencePoints += experience;
+            experiencePoints += experience;
+            onXPGained();
         }
 
         public object CaptureState()
