@@ -8,8 +8,9 @@ namespace TWQ.Resources
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float regenerationPercentage = 80;
+        [SerializeField] float regenerationPercentage = 70;
         float healthPoints = -1f;
+        float currentHealthPercentage = 100;
         bool isDead = false;
 
         public bool IsDead { get => isDead; set => isDead = value; }
@@ -25,13 +26,16 @@ namespace TWQ.Resources
 
         private void RegenerateHealth()
         {
-            float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * (regenerationPercentage / 100);
-            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
+            float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+            healthPoints = (Mathf.Max(currentHealthPercentage, regenerationPercentage) / 100) * regenHealthPoints;
+            currentHealthPercentage = GetPercentage();
         }
 
         public void TakeDamage(GameObject instigator,float damage)
         {
+            print(gameObject.name + " took damage "+ damage);
             healthPoints = Mathf.Max(healthPoints - damage, 0);
+            currentHealthPercentage = GetPercentage();
             if (healthPoints == 0)
             {
                 Die();
@@ -74,6 +78,7 @@ namespace TWQ.Resources
         public void RestoreState(object state)
         {
             healthPoints = (float)state;
+            currentHealthPercentage = GetPercentage();
 
             if (healthPoints == 0)
             {

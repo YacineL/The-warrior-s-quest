@@ -4,10 +4,12 @@ using TWQ.Core;
 using TWQ.Saving;
 using TWQ.Inventory;
 using TWQ.Resources;
+using TWQ.Stats;
+using System.Collections.Generic;
 
 namespace TWQ.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
@@ -100,6 +102,22 @@ namespace TWQ.Combat
             GetComponent<Animator>().ResetTrigger("attack");
         }
 
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if(stat == Stat.Damage)
+            {
+                yield return currentWeapon.WeaponDamage;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.PercentageBonus;
+            }
+        }
+
         private bool GetIsInRange()
         {
             return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.WeaponRange;
@@ -116,14 +134,16 @@ namespace TWQ.Combat
         void Hit()
         {
             if (target == null) { return; }
-            
-            if(currentWeapon.HasProjectile())
+
+            float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
+
+            if (currentWeapon.HasProjectile())
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target , transform.gameObject);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target , transform.gameObject, damage);
             }
             else
-            { 
-                target.TakeDamage(gameObject,currentWeapon.WeaponDamage);
+            {
+                target.TakeDamage(gameObject, damage);
             }
         }
 

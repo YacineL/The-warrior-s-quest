@@ -8,6 +8,7 @@ namespace TWQ.Combat
         [SerializeField] float weaponRange = 1.5f;
         [SerializeField] AnimatorOverrideController animatorOverride = null;
         [SerializeField] float weaponDamage = 10f;
+        [SerializeField] float percentageBonus = 0;
         [SerializeField] GameObject equippedPrefab = null;
         [SerializeField] bool isRightHanded = true;
         [SerializeField] Projectile projectile = null;
@@ -15,6 +16,7 @@ namespace TWQ.Combat
         const string weaponName = "Weapon";
         public float WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
         public float WeaponRange { get => weaponRange; set => weaponRange = value; }
+        public float PercentageBonus { get => percentageBonus; set => percentageBonus = value; }
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
@@ -74,10 +76,10 @@ namespace TWQ.Combat
             return projectile != null;
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target , GameObject instigator)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target , GameObject instigator , float calculatedDamage)
         {
             Projectile projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget( instigator, target , weaponDamage);
+            projectileInstance.SetTarget( instigator, target , calculatedDamage);
         }
     }
 }
