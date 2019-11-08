@@ -21,7 +21,7 @@ namespace TWQ.Combat
         public Weapon currentWeapon = null;
 
 
-        private void Start()
+        private void Awake()
         {
             WeaponInventory weaponInventory;
             GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");

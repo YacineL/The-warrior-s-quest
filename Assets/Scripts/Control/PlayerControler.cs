@@ -11,9 +11,11 @@ namespace TWQ.Control
         Health health;
         Fighter fighter;
         WeaponInventory weaponInventory;
+        Transform camera;
         // Start is called before the first frame update
         void Start()
         {
+            camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
             health = GetComponent<Health>();
             fighter = GetComponent<Fighter>();
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
@@ -58,7 +60,7 @@ namespace TWQ.Control
             {
                 float yAxis = Input.GetAxis("Vertical");
                 float xAxis = Input.GetAxis("Horizontal");
-                GetComponent<Mover>().StartMoveAction((transform.position + Vector3.forward * yAxis + Vector3.right * xAxis), 1f);
+                GetComponent<Mover>().StartMoveAction((transform.position + camera.forward * yAxis + camera.right * xAxis), 1f);
                 return true;
             }/**/
             /* I'm disabling this part because i prefer moving with keys i'm also willing to make the combat system
