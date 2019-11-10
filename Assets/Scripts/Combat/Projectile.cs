@@ -49,11 +49,11 @@ namespace TWQ.Combat
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (target.IsDead) return; 
+            if (target.IsDead) return;
             if (other.GetComponent<Health>() != null)
             {
                 other.transform.GetComponent<Health>().TakeDamage(instigator,damage);
-                transform.GetComponent<Collider>().enabled = false;
+                //transform.GetComponent<Collider>().enabled = false;
                 speed = 0f;
                 if (hitEffect != null)
                 {

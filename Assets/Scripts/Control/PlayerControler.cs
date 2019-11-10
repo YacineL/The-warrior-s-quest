@@ -3,6 +3,8 @@ using UnityEngine;
 using TWQ.Combat;
 using TWQ.Inventory;
 using TWQ.Resources;
+using System;
+using UnityEngine.EventSystems;
 
 namespace TWQ.Control
 {
@@ -12,13 +14,31 @@ namespace TWQ.Control
         Fighter fighter;
         WeaponInventory weaponInventory;
         Transform camera;
+        GameObject inventory;
+        enum CursorType
+        {
+            None,
+            Movement,
+            Combat,
+            UI,
+        }
+
+        [System.Serializable]
+        struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] CursorMapping[] cursorMappings = null;
         // Start is called before the first frame update
         void Start()
         {
             camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
             health = GetComponent<Health>();
             fighter = GetComponent<Fighter>();
-            GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+            inventory = GameObject.FindGameObjectWithTag("Inventory");
             weaponInventory = inventory.GetComponent<WeaponInventory>();
 
         }
@@ -26,11 +46,30 @@ namespace TWQ.Control
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
-            if (health.IsDead) return;
+            
+            if (InteractWithUI()) return;
+            if (health.IsDead)
+            {
+                SetCursor(CursorType.None);
+                return;
+            }
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
+            if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
+            SetCursor(CursorType.None);
         }
+
+
+        private bool InteractWithUI()
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                SetCursor(CursorType.UI);
+                return true;
+            }
+            return false;
+        }
+
 
         private bool InteractWithCombat()
         {
@@ -49,6 +88,7 @@ namespace TWQ.Control
                 {
                     GetComponent<Fighter>().Attack(target.gameObject);
                 }
+                SetCursor(CursorType.Combat);
                 return true;
             }
             return false;
@@ -60,7 +100,8 @@ namespace TWQ.Control
             {
                 float yAxis = Input.GetAxis("Vertical");
                 float xAxis = Input.GetAxis("Horizontal");
-                GetComponent<Mover>().StartMoveAction((transform.position + camera.forward * yAxis + camera.right * xAxis), 1f);
+                GetComponent<Mover>().StartMoveAction((transform.position + camera.forward * yAxis * Time.deltaTime * 100 + camera.right * xAxis * Time.deltaTime * 100), 1f);
+                SetCursor(CursorType.Movement);
                 return true;
             }/**/
             /* I'm disabling this part because i prefer moving with keys i'm also willing to make the combat system
@@ -81,6 +122,23 @@ namespace TWQ.Control
             
         }
 
+        private void SetCursor(CursorType type)
+        {
+            CursorMapping mapping = GetCursorMapping(type);
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType type)
+        {
+            foreach (CursorMapping mapping in cursorMappings)
+            {
+                if (mapping.type == type)
+                {
+                    return mapping;
+                }
+            }
+            return cursorMappings[0];
+        }
         private static Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
