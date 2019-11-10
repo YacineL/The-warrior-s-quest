@@ -50,10 +50,10 @@ namespace TWQ.Combat
         private void OnTriggerEnter(Collider other)
         {
             if (target.IsDead) return;
-            if (other.GetComponent<Health>() != null)
+            if (other.GetComponent<Health>() != null && other.tag != instigator.tag)
             {
                 other.transform.GetComponent<Health>().TakeDamage(instigator,damage);
-                //transform.GetComponent<Collider>().enabled = false;
+                transform.GetComponent<Collider>().enabled = false;
                 speed = 0f;
                 if (hitEffect != null)
                 {

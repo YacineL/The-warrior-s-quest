@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using TWQ.Control;
 using TWQ.Inventory;
 using UnityEngine;
 
 namespace TWQ.Combat
 {
-    public class WeaponPickup : MonoBehaviour
+    public class WeaponPickup : MonoBehaviour, IRaycastable
     {
         [SerializeField] Weapon weapon = null;
         [SerializeField] float respawnTime = 4f;
@@ -13,13 +14,18 @@ namespace TWQ.Combat
         {
             if (other.tag == "Player")
             {
-                other.GetComponent<Fighter>().EquppingWeapon(weapon);
-                StartCoroutine(HideForSeconds(respawnTime));
-                weaponInventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<WeaponInventory>();
-                if (!weaponInventory.IsAlreadyInInventory(weapon))
-                {
-                    weaponInventory.StoredWeapons.Add(weapon);
-                }
+                PickUp(other.GetComponent<Fighter>());
+            }
+        }
+
+        private void PickUp(Fighter fighter)
+        {
+            fighter.EquppingWeapon(weapon);
+            StartCoroutine(HideForSeconds(respawnTime));
+            weaponInventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<WeaponInventory>();
+            if (!weaponInventory.IsAlreadyInInventory(weapon))
+            {
+                weaponInventory.StoredWeapons.Add(weapon);
             }
         }
 
@@ -38,6 +44,14 @@ namespace TWQ.Combat
                 child.gameObject.SetActive(shouldShow);
             }
         }
-       
+
+        public bool HandleRaycast(PlayerControler callingControler)
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                PickUp(callingControler.GetComponent<Fighter>());
+            }
+            return true;
+        }
     }
 }

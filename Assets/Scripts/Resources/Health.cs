@@ -29,6 +29,13 @@ namespace TWQ.Resources
             float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
             healthPoints = (Mathf.Max(currentHealthPercentage, regenerationPercentage) / 100) * regenHealthPoints;
             currentHealthPercentage = GetPercentage();
+            if (isDead && healthPoints > 0)
+            {
+                GetComponent<Animator>().SetTrigger("loadAfterDeath");
+                isDead = false;
+                transform.GetComponent<Collider>().enabled = true;
+            }
+
         }
 
         public void TakeDamage(GameObject instigator,float damage)
