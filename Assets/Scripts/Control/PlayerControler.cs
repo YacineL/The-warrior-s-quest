@@ -5,6 +5,7 @@ using TWQ.Inventory;
 using TWQ.Resources;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 namespace TWQ.Control
 {
@@ -15,13 +16,6 @@ namespace TWQ.Control
         WeaponInventory weaponInventory;
         Transform camera;
         GameObject inventory;
-        enum CursorType
-        {
-            None,
-            Movement,
-            Combat,
-            UI,
-        }
 
         [System.Serializable]
         struct CursorMapping
@@ -32,7 +26,7 @@ namespace TWQ.Control
         }
 
         [SerializeField] CursorMapping[] cursorMappings = null;
-        // Start is called before the first frame update
+        [SerializeField] float maxNavMeshProjectionDistance = 1f;
         void Start()
         {
             camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -46,15 +40,14 @@ namespace TWQ.Control
         // Update is called once per frame
         void Update()
         {
-            
-            if (InteractWithUI()) return;
             if (health.IsDead)
             {
                 SetCursor(CursorType.None);
                 return;
             }
-            if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
+            //if (InteractWithUI()) return;
+            if (InteractWithComponent()) return;
             if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
             SetCursor(CursorType.None);
         }
@@ -71,7 +64,7 @@ namespace TWQ.Control
 
         private bool InteractWithComponent()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits = RaycastAllSorted();
             foreach (RaycastHit hit in hits)
             {
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
@@ -79,7 +72,7 @@ namespace TWQ.Control
                 {
                     if (raycastable.HandleRaycast(this))
                     {
-                        SetCursor(CursorType.Combat);
+                        SetCursor(raycastable.GetCursorType());
                         return true;
                     }
                 }
@@ -87,6 +80,17 @@ namespace TWQ.Control
             return false;
         }
 
+        RaycastHit[] RaycastAllSorted()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            float[] distances = new float[hits.Length];
+            for (int i = 0; i < hits.Length; i++)
+            {
+                distances[i] = hits[i].distance;
+            }
+            Array.Sort(distances, hits);
+            return hits;
+        }
 
         private bool InteractWithMovement()
         {
@@ -95,27 +99,44 @@ namespace TWQ.Control
                 float yAxis = Input.GetAxis("Vertical");
                 float xAxis = Input.GetAxis("Horizontal");
                 GetComponent<Mover>().StartMoveAction((transform.position + camera.forward * yAxis * Time.deltaTime * 100 + camera.right * xAxis * Time.deltaTime * 100), 1f);
-                SetCursor(CursorType.Movement);
+                SetCursor(CursorType.None);
                 return true;
             }/**/
-            /* I'm disabling this part because i prefer moving with keys i'm also willing to make the combat system
-            work with keys (letting only ranged weapons for clicking) */
-            
+             /* I'm disabling this part because i prefer moving with keys i'm also willing to make the combat system
+             work with keys (letting only ranged weapons for clicking) */
+
             /*RaycastHit hit;
-            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
-            if (hasHit)
+            Vector3 target;
+            bool hasHit = RaycastNavMesh(out target);
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point, 1f);
+                    GetComponent<Mover>().StartMoveAction(target, 1f);
+                    SetCursor(CursorType.Movement);
                 }
                 return true;
             }*/
-           
+
             return false;
             
         }
 
+        private bool RaycastNavMesh(out Vector3 target)
+        {
+            target = new Vector3();
+
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            if (!hasHit) return false;
+
+            NavMeshHit navMeshHit;
+            bool hasCastToNavMesh = NavMesh.SamplePosition(
+                hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+            if (!hasCastToNavMesh) return false;
+
+            target = navMeshHit.position;
+            return true;
+        }
         private void SetCursor(CursorType type)
         {
             CursorMapping mapping = GetCursorMapping(type);

@@ -7,6 +7,11 @@ namespace TWQ.Combat
     [RequireComponent(typeof(Health))]
     public class CombatTarget : MonoBehaviour, IRaycastable
     {
+        public CursorType GetCursorType()
+        {
+            return CursorType.Combat;
+        }
+
         public bool HandleRaycast(PlayerControler callingController)
         {
             if (!callingController.GetComponent<Fighter>().CanAttack(gameObject))
