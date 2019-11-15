@@ -6,11 +6,7 @@ namespace TWQ.UI
 {
     public class HealthDisplay : MonoBehaviour
     {
-        Health health;
-        private void Awake()
-        {
-            health = GameObject.FindWithTag("Player").GetComponent<Health>();
-        }
+        [SerializeField] Health health;
         private void Update()
         {
             if(GetComponent<Text>() != null)
