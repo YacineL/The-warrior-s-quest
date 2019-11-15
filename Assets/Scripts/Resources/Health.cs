@@ -2,13 +2,15 @@
 using TWQ.Saving;
 using TWQ.Stats;
 using TWQ.Core;
-using System;
+using UnityEngine.Events;
 
 namespace TWQ.Resources
 {
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regenerationPercentage = 70;
+        [SerializeField] UnityEvent takeDamage;
+
         float healthPoints = -1f;
         float currentHealthPercentage = 100;
         bool isDead = false;
@@ -47,6 +49,10 @@ namespace TWQ.Resources
             {
                 Die();
                 AwardXP(instigator);
+            }
+            else
+            {
+                takeDamage.Invoke();
             }
         }
 
