@@ -10,6 +10,7 @@ namespace TWQ.Resources
     {
         [SerializeField] float regenerationPercentage = 70;
         [SerializeField] TakeDamageEvent takeDamage;
+        [SerializeField] UnityEvent onDie;
 
         [System.Serializable]
         public class TakeDamageEvent : UnityEvent<float>
@@ -47,11 +48,11 @@ namespace TWQ.Resources
 
         public void TakeDamage(GameObject instigator,float damage)
         {
-            print(gameObject.name + " took damage "+ damage);
             healthPoints = Mathf.Max(healthPoints - damage, 0);
             currentHealthPercentage = GetPercentage();
             if (healthPoints == 0)
             {
+                onDie.Invoke();
                 Die();
                 AwardXP(instigator);
             }

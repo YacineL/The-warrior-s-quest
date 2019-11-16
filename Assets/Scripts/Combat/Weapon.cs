@@ -1,85 +1,15 @@
-﻿using TWQ.Resources;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
+
 namespace TWQ.Combat
 {
-    [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make new weapon", order = 0)]
-    public class Weapon : ScriptableObject
+    public class Weapon : MonoBehaviour
     {
-        [SerializeField] float weaponRange = 1.5f;
-        [SerializeField] AnimatorOverrideController animatorOverride = null;
-        [SerializeField] float weaponDamage = 10f;
-        [SerializeField] float percentageBonus = 0;
-        [SerializeField] GameObject equippedPrefab = null;
-        [SerializeField] bool isRightHanded = true;
-        [SerializeField] Projectile projectile = null;
-
-        const string weaponName = "Weapon";
-        public float WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
-        public float WeaponRange { get => weaponRange; set => weaponRange = value; }
-        public float PercentageBonus { get => percentageBonus; set => percentageBonus = value; }
-
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        [SerializeField] UnityEvent onHit;
+        public void OnHit()
         {
-            DestroyOldWeapon(rightHand, leftHand);
-
-            if (equippedPrefab != null)
-            {
-                Transform hand = GetHandTransform(rightHand, leftHand);
-                GameObject weapon = Instantiate(equippedPrefab, hand);
-                weapon.name = weaponName;
-            }
-            if (animatorOverride != null)
-            {
-                animator.runtimeAnimatorController = animatorOverride;
-            }
-
-            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
-            if(animatorOverride != null)
-            {
-                animator.runtimeAnimatorController = animatorOverride;  
-            }
-            else if (overrideController != null)
-            {
-                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
-            }
-        }
-
-        private static void DestroyOldWeapon(Transform rightHand, Transform leftHand)
-        {
-            Transform oldWeapon = rightHand.Find(weaponName);
-            if (oldWeapon == null)
-            {
-                oldWeapon = leftHand.Find(weaponName);
-            }
-            if (oldWeapon == null) return;
-
-            oldWeapon.name = "DESTROYING";
-            Destroy(oldWeapon.gameObject);
-        }
-        private Transform GetHandTransform(Transform rightHand, Transform leftHand)
-        {
-            Transform hand;
-            if (isRightHanded)
-            {
-                hand = rightHand;
-            }
-            else
-            {
-                hand = leftHand;
-            }
-
-            return hand;
-        }
-
-        public bool HasProjectile()
-        {
-            return projectile != null;
-        }
-
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target , GameObject instigator , float calculatedDamage)
-        {
-            Projectile projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget( instigator, target , calculatedDamage);
+            onHit.Invoke();
+            print(this.gameObject.name);
         }
     }
 }

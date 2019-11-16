@@ -14,7 +14,6 @@ namespace TWQ.Control
         Health health;
         Fighter fighter;
         WeaponInventory weaponInventory;
-        Transform camera;
         GameObject inventory;
 
         [System.Serializable]
@@ -29,7 +28,6 @@ namespace TWQ.Control
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
         void Start()
         {
-            camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
             health = GetComponent<Health>();
             fighter = GetComponent<Fighter>();
             inventory = GameObject.FindGameObjectWithTag("Inventory");
@@ -45,9 +43,9 @@ namespace TWQ.Control
                 SetCursor(CursorType.None);
                 return;
             }
+            if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
             //if (InteractWithUI()) return;
-            if (InteractWithComponent()) return;
             if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
             SetCursor(CursorType.None);
         }
@@ -98,7 +96,7 @@ namespace TWQ.Control
             {
                 float yAxis = Input.GetAxis("Vertical");
                 float xAxis = Input.GetAxis("Horizontal");
-                GetComponent<Mover>().StartMoveAction((transform.position + camera.forward * yAxis * Time.deltaTime * 100 + camera.right * xAxis * Time.deltaTime * 100), 1f);
+                GetComponent<Mover>().StartMoveAction((transform.position + Camera.main.transform.forward * yAxis * Time.deltaTime * 100 + Camera.main.transform.right * xAxis * Time.deltaTime * 100), 1f);
                 SetCursor(CursorType.None);
                 return true;
             }/**/
@@ -168,9 +166,9 @@ namespace TWQ.Control
         public int GetCurrentWeaponIndex()
         {
             int iterator = 0;
-            foreach (Weapon weapon in weaponInventory.StoredWeapons)
+            foreach (WeaponConfig weapon in weaponInventory.StoredWeapons)
             {
-                if (weapon.Equals(fighter.currentWeapon))
+                if (weapon.Equals(fighter.currentWeaponConfig))
                 {
                     return iterator;
                 }

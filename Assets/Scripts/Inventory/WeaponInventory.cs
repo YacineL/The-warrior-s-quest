@@ -7,13 +7,13 @@ namespace TWQ.Inventory
     public class WeaponInventory : MonoBehaviour
     {
         [SerializeField] string weaponInventoryString = null;
-        [SerializeField] List<Weapon> storedWeapons = null;
+        [SerializeField] List<WeaponConfig> storedWeapons = null;
 
         public string WeaponInventoryString { get => weaponInventoryString; set => weaponInventoryString = value; }
-        public List<Weapon> StoredWeapons { get => storedWeapons; set => storedWeapons = value; }
-        public bool IsAlreadyInInventory(Weapon pickedWeapon)
+        public List<WeaponConfig> StoredWeapons { get => storedWeapons; set => storedWeapons = value; }
+        public bool IsAlreadyInInventory(WeaponConfig pickedWeapon)
         {
-            foreach (Weapon weapon in StoredWeapons)
+            foreach (WeaponConfig weapon in StoredWeapons)
             {
                 if (weapon.Equals(pickedWeapon)) return true;
             }

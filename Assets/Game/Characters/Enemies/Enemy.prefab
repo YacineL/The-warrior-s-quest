@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &6974848918406566524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825267890551819034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da0500598fb18b40bfa117bf5e298e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 1721040237141645517}
-  canvas: {fileID: 0}
 --- !u!114 &8845615685905978765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,16 +64,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2052004034322177197}
     m_Modifications:
-    - target: {fileID: 4579781111702424557, guid: 1b421f3dd68791b45b94be2b42edf3a8,
-        type: 3}
-      propertyPath: health
-      value: 
-      objectReference: {fileID: 1721040237141645517}
-    - target: {fileID: 4579781111702424557, guid: 1b421f3dd68791b45b94be2b42edf3a8,
-        type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 3460384125160847189}
     - target: {fileID: 1415370639222556087, guid: 1b421f3dd68791b45b94be2b42edf3a8,
         type: 3}
       propertyPath: m_Name
@@ -153,6 +129,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4579781111702424557, guid: 1b421f3dd68791b45b94be2b42edf3a8,
+        type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 1721040237141645517}
+    - target: {fileID: 4579781111702424557, guid: 1b421f3dd68791b45b94be2b42edf3a8,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 3460384125160847189}
     - target: {fileID: 3220290039703924142, guid: 1b421f3dd68791b45b94be2b42edf3a8,
         type: 3}
       propertyPath: health
@@ -161,12 +147,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3220290039703924142, guid: 1b421f3dd68791b45b94be2b42edf3a8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1b421f3dd68791b45b94be2b42edf3a8, type: 3}
---- !u!1 &1825267890551819034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2896555452165616599, guid: 1b421f3dd68791b45b94be2b42edf3a8,
-    type: 3}
-  m_PrefabInstance: {fileID: 3559539906366273741}
-  m_PrefabAsset: {fileID: 0}
 --- !u!223 &3460384125160847189 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 100143143857754008, guid: 1b421f3dd68791b45b94be2b42edf3a8,
@@ -329,11 +309,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3023985609648365373, guid: 892ce8f073881294e9e86b1aacb6548a,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.185
       objectReference: {fileID: 0}
     - target: {fileID: 4668099636167030647, guid: 892ce8f073881294e9e86b1aacb6548a,
         type: 3}

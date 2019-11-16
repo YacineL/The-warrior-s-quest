@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TWQ.Control;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -36,26 +37,36 @@ namespace TWQ.SceneManagement
                 yield break;
             }
 
-            Fader fader = FindObjectOfType<Fader>();
-
             DontDestroyOnLoad(gameObject);
+
+            Fader fader = FindObjectOfType<Fader>();
+            SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+            PlayerControler playerController = GameObject.FindWithTag("Player").GetComponent<PlayerControler>();
+            playerController.enabled = false;
+
             yield return fader.FadeOut(fadeOutTime);
 
-            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
-            wrapper.Save();
+            savingWrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
-            wrapper.Load();
+            PlayerControler newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerControler>();
+            newPlayerController.enabled = false;
+
+
+            savingWrapper.Load();
 
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
-            wrapper.Save();
+            savingWrapper.Save();
 
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
+
+            newPlayerController.enabled = true;
             Destroy(gameObject);
         }
+
 
         private void UpdatePlayer(Portal otherPortal)
         {

@@ -14,19 +14,19 @@ namespace TWQ.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] Weapon defaultWeapon = null;
+        [SerializeField] WeaponConfig defaultWeapon = null;
 
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
-        public Weapon currentWeapon = null;
-
+        public WeaponConfig currentWeaponConfig = null;
+        Weapon currentWeapon;
 
         private void Start()
         {
             WeaponInventory weaponInventory;
             GameObject gameObject = GameObject.FindGameObjectWithTag("Inventory");
             weaponInventory = gameObject.GetComponent<WeaponInventory>();
-            if (currentWeapon == null)
+            if (currentWeaponConfig == null)
             {
                 EquppingWeapon(defaultWeapon);
                 if (!weaponInventory.IsAlreadyInInventory(defaultWeapon)  && transform.tag =="Player")
@@ -34,10 +34,11 @@ namespace TWQ.Combat
                     weaponInventory.StoredWeapons.Add(defaultWeapon);
                 }
             }
-            else if (!weaponInventory.IsAlreadyInInventory(currentWeapon) && transform.tag == "Player")
+            else if (!weaponInventory.IsAlreadyInInventory(currentWeaponConfig) && transform.tag == "Player")
             {
-                weaponInventory.StoredWeapons.Add(currentWeapon);
+                weaponInventory.StoredWeapons.Add(currentWeaponConfig);
             }
+            currentWeapon = currentWeaponConfig.EquippedPrefab;
         }
 
         private void Update()
@@ -50,7 +51,8 @@ namespace TWQ.Combat
 
             if (!GetIsInRange())
             {
-                GetComponent<Mover>().MoveTo(target.transform.position, 1f);
+                Vector3 targetPosition = Vector3.Scale(target.transform.position, (Vector3.right + Vector3.forward));
+                GetComponent<Mover>().MoveTo(targetPosition, 1f);
             }
             else
             {
@@ -59,11 +61,12 @@ namespace TWQ.Combat
             }
         }
 
-        public void EquppingWeapon(Weapon weapon)
+        public void EquppingWeapon(WeaponConfig weapon)
         {
-            currentWeapon = weapon;
+            currentWeaponConfig = weapon;
+            currentWeapon = weapon.EquippedPrefab;
             Animator animator = GetComponent<Animator>();
-            weapon.Spawn(rightHandTransform, leftHandTransform, animator);
+            currentWeapon = currentWeaponConfig.Spawn(rightHandTransform, leftHandTransform, animator);
         }
 
         private void AttackBehaviour()
@@ -106,7 +109,7 @@ namespace TWQ.Combat
         {
             if(stat == Stat.Damage)
             {
-                yield return currentWeapon.WeaponDamage;
+                yield return currentWeaponConfig.WeaponDamage;
             }
         }
 
@@ -114,13 +117,13 @@ namespace TWQ.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.PercentageBonus;
+                yield return currentWeaponConfig.PercentageBonus;
             }
         }
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.WeaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) < currentWeaponConfig.WeaponRange;
         }
 
         public bool CanAttack(GameObject combatTarget)
@@ -136,10 +139,15 @@ namespace TWQ.Combat
             if (target == null) { return; }
 
             float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-
-            if (currentWeapon.HasProjectile())
+            
+            if(currentWeaponConfig.EquippedPrefab != null)
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target , transform.gameObject, damage);
+                currentWeapon.OnHit();
+            }
+
+            if (currentWeaponConfig.HasProjectile())
+            {
+                currentWeaponConfig.LaunchProjectile(rightHandTransform, leftHandTransform, target , transform.gameObject, damage);
             }
             else
             {
@@ -156,14 +164,14 @@ namespace TWQ.Combat
 
         public object CaptureState()
         {
-            return currentWeapon.name;
+            return currentWeaponConfig.name;
         }
 
         public void RestoreState(object state)
         {
 
             string weaponName = (string)state;
-            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
+            WeaponConfig weapon = UnityEngine.Resources.Load<WeaponConfig>(weaponName);
             EquppingWeapon(weapon);
         }
     }

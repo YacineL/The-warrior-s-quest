@@ -1,5 +1,6 @@
 ﻿using TWQ.Resources;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TWQ.Combat
 {
@@ -11,6 +12,7 @@ namespace TWQ.Combat
         [SerializeField] float maxLifeTime = 10f;
         [SerializeField] GameObject[] destroyOnHit = null;
         [SerializeField] float lifeAfterImpact = 2f;
+        [SerializeField] UnityEvent onProjectileHit;
         Health target = null;
         GameObject instigator = null;
         float damage = 0f;
@@ -45,13 +47,23 @@ namespace TWQ.Combat
             {
                 return target.transform.position;
             }
-            return target.transform.position + ( Vector3.up * targetCollider.height  / 1.5f );
+            return target.transform.position + ( Vector3.up * targetCollider.height  / 1.25f );
         }
         private void OnTriggerEnter(Collider other)
         {
             if (target.IsDead) return;
+            if (other.GetComponent<Health>() == null)
+            {
+                foreach (GameObject toDestroy in destroyOnHit)
+                {
+                    Destroy(toDestroy);
+                }
+
+                Destroy(gameObject, 0);
+            }
             if (other.GetComponent<Health>() != null && other.tag != instigator.tag)
             {
+                onProjectileHit.Invoke();
                 other.transform.GetComponent<Health>().TakeDamage(instigator,damage);
                 transform.GetComponent<Collider>().enabled = false;
                 speed = 0f;
