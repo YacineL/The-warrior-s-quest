@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using TWQ.Resources;
+using TWQ.Attributes;
 using TWQ.Control;
 
 namespace TWQ.Combat

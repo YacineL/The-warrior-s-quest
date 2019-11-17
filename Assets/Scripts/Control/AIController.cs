@@ -1,7 +1,7 @@
 ﻿using TWQ.Combat;
 using TWQ.Core;
 using TWQ.Movement;
-using TWQ.Resources;
+using TWQ.Attributes;
 using UnityEngine;
 using UnityEngine.AI;
 

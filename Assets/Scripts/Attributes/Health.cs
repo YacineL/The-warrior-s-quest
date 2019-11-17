@@ -4,7 +4,7 @@ using TWQ.Stats;
 using TWQ.Core;
 using UnityEngine.Events;
 
-namespace TWQ.Resources
+namespace TWQ.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
@@ -46,6 +46,12 @@ namespace TWQ.Resources
 
         }
 
+        public void Heal(float healthToRestore)
+        {
+            float percentageToRestore = GetMaxHealthPoints() * (healthToRestore / 100);
+            healthPoints = Mathf.Min(healthPoints + percentageToRestore, GetMaxHealthPoints());
+        }
+
         public void TakeDamage(GameObject instigator,float damage)
         {
             healthPoints = Mathf.Max(healthPoints - damage, 0);
@@ -70,6 +76,11 @@ namespace TWQ.Resources
         public float GetHealthPoints()
         {
             return healthPoints;
+        }
+
+        public float GetMaxHealthPoints()
+        {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
         }
         private void Die()
         {

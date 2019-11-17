@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TWQ.Attributes;
 using TWQ.Control;
 using TWQ.Inventory;
 using UnityEngine;
@@ -9,24 +10,35 @@ namespace TWQ.Combat
     {
         [SerializeField] WeaponConfig weapon = null;
         [SerializeField] float respawnTime = 4f;
+        [SerializeField] float healthPercentageToRestore = 0;
+
         WeaponInventory weaponInventory = null;
         private void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")
             {
-                PickUp(other.GetComponent<Fighter>());
+                PickUp(other.gameObject);
             }
         }
 
-        private void PickUp(Fighter fighter)
+        private void PickUp(GameObject subject)
         {
-            fighter.EquppingWeapon(weapon);
-            StartCoroutine(HideForSeconds(respawnTime));
-            weaponInventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<WeaponInventory>();
-            if (!weaponInventory.IsAlreadyInInventory(weapon))
+            if(weapon != null)
             {
-                weaponInventory.StoredWeapons.Add(weapon);
+                subject.GetComponent<Fighter>().EquppingWeapon(weapon);
+                weaponInventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<WeaponInventory>();
+                if (!weaponInventory.IsAlreadyInInventory(weapon))
+                {
+                    weaponInventory.StoredWeapons.Add(weapon);
+                }
             }
+            
+            if(healthPercentageToRestore > 0)
+            {
+                subject.GetComponent<Health>().Heal(healthPercentageToRestore);
+            }
+            
+            StartCoroutine(HideForSeconds(respawnTime));
         }
 
         private IEnumerator HideForSeconds(float seconds)
@@ -38,7 +50,7 @@ namespace TWQ.Combat
 
         private void ShowPickup(bool shouldShow)
         {
-            GetComponent<Collider>().enabled = false;
+            GetComponent<Collider>().enabled = shouldShow;
             foreach(Transform child in transform)
             {
                 child.gameObject.SetActive(shouldShow);
@@ -49,7 +61,7 @@ namespace TWQ.Combat
         {
             if(Input.GetMouseButtonDown(0))
             {
-                PickUp(callingControler.GetComponent<Fighter>());
+                PickUp(callingControler.gameObject);
             }
             return true;
         }

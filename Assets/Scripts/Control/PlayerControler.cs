@@ -2,7 +2,7 @@
 using UnityEngine;
 using TWQ.Combat;
 using TWQ.Inventory;
-using TWQ.Resources;
+using TWQ.Attributes;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;

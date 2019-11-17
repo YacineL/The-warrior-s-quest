@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TWQ.Stats;
+﻿using TWQ.Stats;
 using UnityEngine;
 using UnityEngine.UI;
 

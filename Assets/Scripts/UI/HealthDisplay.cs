@@ -1,4 +1,4 @@
-﻿using TWQ.Resources;
+﻿using TWQ.Attributes;
 using UnityEngine;
 using UnityEngine.UI;
 

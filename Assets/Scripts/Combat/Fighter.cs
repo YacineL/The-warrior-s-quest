@@ -3,7 +3,7 @@ using TWQ.Movement;
 using TWQ.Core;
 using TWQ.Saving;
 using TWQ.Inventory;
-using TWQ.Resources;
+using TWQ.Attributes;
 using TWQ.Stats;
 using System.Collections.Generic;
 
