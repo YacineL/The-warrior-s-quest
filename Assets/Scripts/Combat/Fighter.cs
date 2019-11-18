@@ -51,7 +51,10 @@ namespace TWQ.Combat
 
             if (!GetIsInRange())
             {
-                Vector3 targetPosition = Vector3.Scale(target.transform.position, (Vector3.right + Vector3.forward));
+                Vector3 targetPosition = Vector3.Scale(target.transform.position, (Vector3.right + Vector3.forward)) + Vector3.up * transform.position.y;
+                print(target.transform.position);
+                print(transform.position);
+                print(targetPosition);
                 GetComponent<Mover>().MoveTo(targetPosition, 1f);
             }
             else

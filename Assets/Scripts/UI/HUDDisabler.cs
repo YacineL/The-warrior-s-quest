@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TWQ.Control;
+﻿using TWQ.Control;
 using UnityEngine;
 
 public class HUDDisabler : MonoBehaviour

@@ -95,6 +95,7 @@ namespace TWQ.Control
         {
             if (Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f)
             {
+                GetComponent<NavMeshAgent>().ResetPath();
                 float yAxis = Input.GetAxis("Vertical");
                 float xAxis = Input.GetAxis("Horizontal");
                 GetComponent<Mover>().StartMoveAction((transform.position + Camera.main.transform.forward * yAxis * Time.deltaTime * 100 + Camera.main.transform.right * xAxis * Time.deltaTime * 100), 1f);

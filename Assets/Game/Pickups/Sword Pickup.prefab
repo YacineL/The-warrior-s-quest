@@ -76,6 +76,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1316965376128791375, guid: 49c38400a989a924e884aac0f826a070,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 309687137529273389, guid: 49c38400a989a924e884aac0f826a070,
         type: 3}
       propertyPath: m_Name
@@ -140,6 +145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366776751480322822, guid: 49c38400a989a924e884aac0f826a070,
+        type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6889950462118197419, guid: 49c38400a989a924e884aac0f826a070,
         type: 3}
