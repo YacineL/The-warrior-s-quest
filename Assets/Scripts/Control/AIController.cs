@@ -11,6 +11,8 @@ namespace TWQ.Control
     {
         [SerializeField] float chaseDistance = 6.5f;
         [SerializeField] float suspicionTime = 3f;
+        [SerializeField] float agroCooldownTime = 5f;
+        [SerializeField] float shoutDistance = 5f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 1f;
         [SerializeField] float waypointDwellTime = 3f;
@@ -25,6 +27,7 @@ namespace TWQ.Control
         Vector3 guardPosition;
         float timeSinceLastSaw = Mathf.Infinity;
         float timeSinceArriveAtWaypoint = Mathf.Infinity;
+        float timeSinceAggrevated = Mathf.Infinity;
         int currentWapointIndex = 0;
         private void Start()
         {
@@ -39,7 +42,7 @@ namespace TWQ.Control
         {
             if (health.IsDead) return;
 
-            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
+            if (IsAggrevated() && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
@@ -58,8 +61,13 @@ namespace TWQ.Control
         {
             timeSinceLastSaw += Time.deltaTime;
             timeSinceArriveAtWaypoint += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
+        public void Aggrevate()
+        {
+            timeSinceAggrevated = 0;
+        }
         private void PatrolBehaviour()
         {
             Vector3 nextPosition = guardPosition;
@@ -109,12 +117,26 @@ namespace TWQ.Control
         {
             timeSinceLastSaw = 0;
             fighter.Attack(player);
+
+            AggrevateNearbyEnemies();
         }
 
-        private bool InAttackRangeOfPlayer()
+        private void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+            foreach (RaycastHit hit in hits)
+            {
+                AIController ai = hit.collider.GetComponent<AIController>();
+                if (ai == null) continue;
+
+                ai.Aggrevate();
+            }
+        }
+
+        private bool IsAggrevated()
         {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            return distanceToPlayer < chaseDistance;
+            return distanceToPlayer < chaseDistance || timeSinceAggrevated < agroCooldownTime;
         }
 
         private void OnDrawGizmosSelected()

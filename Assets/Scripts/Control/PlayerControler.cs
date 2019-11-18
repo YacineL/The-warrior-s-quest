@@ -26,6 +26,7 @@ namespace TWQ.Control
 
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] float raycastRadius = 1f;
         void Start()
         {
             health = GetComponent<Health>();
@@ -43,8 +44,8 @@ namespace TWQ.Control
                 SetCursor(CursorType.None);
                 return;
             }
-            if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
+            if (InteractWithComponent()) return;
             //if (InteractWithUI()) return;
             if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
             SetCursor(CursorType.None);
@@ -80,7 +81,7 @@ namespace TWQ.Control
 
         RaycastHit[] RaycastAllSorted()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), raycastRadius);
             float[] distances = new float[hits.Length];
             for (int i = 0; i < hits.Length; i++)
             {
