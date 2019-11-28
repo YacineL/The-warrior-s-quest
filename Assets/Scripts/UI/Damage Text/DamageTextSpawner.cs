@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
- namespace TWQ.UI
+﻿using UnityEngine;
+namespace TWQ.UI
 {
     public class DamageTextSpawner : MonoBehaviour
     {
@@ -9,7 +7,7 @@ using UnityEngine;
 
         public void Spawn(float damageAmount)
         {
-            DamageText instance = Instantiate<DamageText>(damageTextPrefab, transform);
+            DamageText instance = Instantiate(damageTextPrefab, transform);
             instance.SetValue(damageAmount);
         }
     }
