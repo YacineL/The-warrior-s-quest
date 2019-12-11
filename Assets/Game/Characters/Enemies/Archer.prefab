@@ -87,17 +87,17 @@ PrefabInstance:
       propertyPath: shoutDistance
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 1101834818847653104, guid: 404fb7575b7c95944b155706dcaf3fd0,
-        type: 3}
-      propertyPath: characterClass
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6280893209468991292, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
       propertyPath: defaultWeapon
       value: 
       objectReference: {fileID: 11400000, guid: d91e704f36c5f3042af04814a8284ada,
         type: 2}
+    - target: {fileID: 1101834818847653104, guid: 404fb7575b7c95944b155706dcaf3fd0,
+        type: 3}
+      propertyPath: characterClass
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4931011182914362116, guid: 404fb7575b7c95944b155706dcaf3fd0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

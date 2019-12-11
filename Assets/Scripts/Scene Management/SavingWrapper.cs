@@ -40,7 +40,7 @@ namespace TWQ.SceneManagement
             }
         }
 
-        private void Delete()
+        public void Delete()
         {
             GetComponent<SavingSystem>().Delete(defaultSaveFile);
         }

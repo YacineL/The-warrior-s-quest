@@ -6,6 +6,7 @@ using TWQ.Attributes;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
+using TMPro;
 
 namespace TWQ.Control
 {
@@ -15,6 +16,7 @@ namespace TWQ.Control
         Fighter fighter;
         WeaponInventory weaponInventory;
         GameObject inventory;
+        bool isPaused = false;
 
         [System.Serializable]
         struct CursorMapping
@@ -27,6 +29,8 @@ namespace TWQ.Control
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
         [SerializeField] float raycastRadius = 1f;
+        [SerializeField] GameObject gameOverCanvas;
+        [SerializeField] TextMeshProUGUI deathText;
         void Start()
         {
             health = GetComponent<Health>();
@@ -42,13 +46,38 @@ namespace TWQ.Control
             if (health.IsDead)
             {
                 SetCursor(CursorType.None);
+                gameOverCanvas.SetActive(true);
+                deathText.text = "You Die";
+
                 return;
             }
+            if (InteractWithPausing()) return;
             if (InteractWithMovement()) return;
             if (InteractWithComponent()) return;
             //if (InteractWithUI()) return;
             if (Input.GetKeyDown(KeyCode.C)) SwitchWeapons();
             SetCursor(CursorType.None);
+        }
+
+        private bool InteractWithPausing()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(!isPaused)
+                {
+                    gameOverCanvas.SetActive(true);
+                    Time.timeScale = 0;
+                    isPaused = true;
+                }
+                else 
+                {
+                    gameOverCanvas.SetActive(false);
+                    Time.timeScale = 1;
+                    isPaused = false;
+                }
+                return true;
+            }
+            return false;
         }
 
         private bool InteractWithUI()
